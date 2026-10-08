@@ -1,0 +1,4 @@
+interface:
+  display_name: "KnowBridge"
+  short_description: "交互 HTML 课程、批量答题与独立答疑，保留主线学习进度"
+  default_prompt: "用 $knowbridge 从我的已有知识搭建学习路线，生成 HTML 课程、交互演示和批量答题页，并支持独立答疑。"

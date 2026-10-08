@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark"><title>@@TITLE@@ · 练习</title>
+  <link rel="stylesheet" href="../ui/styles.css">
+  <script id="kb-data" type="application/json">@@DATA@@</script>
+  <script defer src="../ui/common.js"></script><script defer src="../ui/quiz.js"></script>
+</head>
+<body class="quiz-page">
+  <a class="skip-link" href="#quiz-main">跳到题目</a>
+  <header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">k</span> KnowBridge</a><a class="back-link" href="../lessons/@@NODE@@.html">← 返回课程</a><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">◐</button></header>
+  <main class="quiz-layout" id="quiz-main">
+    <div class="quiz-intro"><p class="eyebrow">PRACTICE / 学以致用</p><h1>@@TITLE@@</h1><p class="hero-subtitle">一次完成整组练习，按自己的节奏思考。</p><p class="muted">草稿保存在此浏览器。导出答案后交给学习助手批改；开放题会按评价标准审阅。</p></div>
+    <div class="quiz-grid"><form id="quiz-form" novalidate><div id="question-list"></div><button class="button primary" type="submit">导出本次答案</button></form>
+      <aside class="quiz-sidebar" aria-label="答题进度"><div class="sidebar-card"><p class="eyebrow">本次进度</p><p class="quiz-counter"><strong id="answered-count">0</strong><span id="total-count"></span></p><progress id="quiz-progress" value="0" max="1"></progress><nav id="question-nav" class="question-nav" aria-label="题目导航"></nav><p id="draft-status" class="small muted" role="status">正在读取草稿…</p><button id="export-button" class="button primary" type="button">导出答案 JSON</button><button id="copy-answers" class="button" type="button">复制答案</button><label class="button file-button">导入草稿<input id="import-answers" type="file" accept=".json,application/json"></label></div><p class="small muted">此页不加载答案钥匙。导出完成不等于已经批改，也不会自动改变课程掌握状态。</p></aside>
+    </div>
+  </main>
+  <dialog id="export-dialog"><div class="dialog-heading"><h2>本次答案</h2><button class="icon-button" data-close-dialog aria-label="关闭答案窗口">×</button></div><p>下载或复制这份答案，交给学习助手批改。</p><textarea id="export-text" readonly rows="12" aria-label="可复制的答案 JSON"></textarea><div class="button-row"><button id="download-answers" class="button primary">下载 JSON</button><button id="copy-export" class="button">复制 JSON</button></div></dialog>
+  <button id="ask-floating" class="ask-floating" type="button">＋ 对题目提问</button>
+  @@SIDECHAT@@
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

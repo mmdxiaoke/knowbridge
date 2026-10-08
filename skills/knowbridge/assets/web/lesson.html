@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark"><title>@@TITLE@@ · KnowBridge</title>
+  <link rel="stylesheet" href="../ui/styles.css">
+  <script id="kb-data" type="application/json">@@DATA@@</script>
+  <script defer src="../ui/common.js"></script><script defer src="../ui/demos.js"></script><script defer src="../ui/lesson.js"></script>@@CUSTOM_SCRIPT@@
+</head>
+<body class="lesson-page">
+  <a class="skip-link" href="#lesson-content">跳到正文</a>
+  <header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">k</span> KnowBridge</a><span class="topbar-note">从已知，走向新知</span><button class="icon-button" id="theme-toggle" aria-label="切换明暗主题">◐</button></header>
+  <div class="reading-meter" aria-hidden="true"><span id="reading-meter"></span></div>
+  <div class="lesson-layout">
+    <aside class="lesson-sidebar" aria-label="课程导航">
+      <a class="back-link" href="../index.html">← 学习路线</a><p class="eyebrow">本节导航</p><nav id="lesson-toc" aria-label="本节目录"></nav>
+      <div class="sidebar-card"><p class="eyebrow">学以致用</p><p id="goal-short"></p><a class="button primary" href="../quizzes/@@NODE@@.html">进入练习 →</a></div>
+      <p class="small muted">阅读位置会在此浏览器保存。答疑窗口关闭后，继续原处学习。</p>
+    </aside>
+    <main id="lesson-content" class="lesson-main">
+      <div class="lesson-hero"><p class="eyebrow">@@KICKER@@</p><h1>@@TITLE@@</h1><p class="hero-subtitle">@@SUBTITLE@@</p><div class="meta-row"><span>约 @@MINUTES@@ 分钟</span><span>@@LEVEL@@</span><span id="read-state">准备开始</span></div></div>
+      <article class="lesson-body">@@CONTENT@@</article>
+      <footer class="lesson-footer"><div><p class="eyebrow">检验理解</p><h2>把理解，变成能做到</h2><p>完整题组已备好。先读完，再用自己的思路回答。</p></div><a class="button primary" href="../quizzes/@@NODE@@.html">开始本节练习 →</a></footer>
+    </main>
+  </div>
+  <button id="ask-floating" class="ask-floating" type="button">＋ 对此处提问</button>
+  @@SIDECHAT@@
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

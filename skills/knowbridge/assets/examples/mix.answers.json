@@ -1,0 +1,10 @@
+{
+  "node_id": "mix",
+  "answers": {
+    "q1": {"value": "B", "explanation": "0.4 与 0.6 非负且总和为 1。"},
+    "q2": {"value": 3, "explanation": "0.25 × 0 + 0.75 × 4 = 3。"},
+    "q3": {"value": ["A", "C"], "explanation": "这是凸组合。它通常混合多项，增大某项权重的方向取决于输入值。"},
+    "q4": {"value": 6.5, "explanation": "第一个分量为 0.25 × 2 + 0.75 × 8 = 6.5。"},
+    "q5": {"value": "B", "explanation": "加权求和只解释输出部件，还需解释分数与归一化。"}
+  }
+}

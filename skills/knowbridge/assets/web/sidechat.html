@@ -1,0 +1,8 @@
+<dialog id="sidechat-dialog" aria-labelledby="sidechat-title">
+  <div class="dialog-heading"><div><p class="eyebrow">SIDE CHAT / 独立答疑</p><h2 id="sidechat-title">把疑问，放在旁边聊</h2></div><button class="icon-button" data-close-dialog aria-label="关闭答疑窗口">×</button></div>
+  <p class="muted">带上这一小段的背景，继续主线时不用重读整段对话。</p>
+  <div class="quote-box"><span id="sidechat-anchor" class="small muted"></span><blockquote id="sidechat-quote"></blockquote></div>
+  <label class="field-label" for="sidechat-question">你想问什么？</label><textarea id="sidechat-question" rows="3" maxlength="1400" placeholder="例如：这里的两个量为什么需要相加？"></textarea>
+  <div class="button-row"><button id="prepare-sidechat" class="button primary" type="button">准备提问</button></div>
+  <div id="sidechat-handoff" hidden><label class="field-label" for="sidechat-prompt">带上下文的提问</label><textarea id="sidechat-prompt" rows="7" readonly></textarea><div class="button-row"><button id="copy-side-command" class="button primary">复制 /side 命令</button><button id="copy-side-prompt" class="button">复制提问正文</button></div><ol class="handoff-steps"><li>返回 Codex 聊天输入框，粘贴并发送 <code>/side …</code>。</li><li>如果客户端没有此命令，手动打开独立聊天，粘贴提问正文。</li><li>答疑后回来继续阅读；只有影响学习路线的结论需要带回主聊天。</li></ol><p class="small muted">此网页负责准备与复制提问。是否支持 side chat 取决于当前客户端；这里不会直接创建聊天或自动发送消息。</p></div>
+</dialog>

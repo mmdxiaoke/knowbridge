@@ -1,0 +1,40 @@
+<section id="bridge">
+  <h2>01 · 从熟悉的平均数出发</h2>
+  <p data-context>两个数的普通平均，是让它们各贡献一半。加权平均允许贡献不同：一个占四分之一，另一个占四分之三。注意力输出中的加权求和，也可以从这个熟悉的动作理解。</p>
+  <div class="bridge-grid"><div class="concept-card"><p class="eyebrow">你已经知道</p><h3>平均数</h3><p>把多个数合在一起，得到一个代表值。普通平均默认每一项同样重要。</p></div><div class="concept-card"><p class="eyebrow">今天的新连接</p><h3>有不同贡献的合成</h3><p>保留“合起来”的动作，但给每项指定贡献比例。比例如何产生，是后续注意力机制要解决的问题。</p></div></div>
+  <div class="callout"><strong>本节完成后，你应该能：</strong><p>算出两个值的归一化加权和，解释滑动权重为什么改变输出，并说清“加权求和”与完整注意力机制之间还缺什么。</p></div>
+</section>
+<section id="notation">
+  <h2>02 · 让每个符号都有着落</h2>
+  <p>把两个输入值记作 <em>v₁</em>、<em>v₂</em>，贡献比例记作 <em>w₁</em>、<em>w₂</em>。在本节模型中，权重非负且总和为 1，所以输出是两个值的凸组合。</p>
+  <div class="formula">y = w₁v₁ + w₂v₂<span class="small">w₁ ≥ 0，w₂ ≥ 0，w₁ + w₂ = 1</span></div>
+  <div class="table-scroll"><table><thead><tr><th>符号</th><th>含义</th><th>本节示例</th></tr></thead><tbody><tr><td>v₁、v₂</td><td>要合成的信息值</td><td>2 和 10</td></tr><tr><td>w₁、w₂</td><td>每项的贡献比例</td><td>0.25 和 0.75</td></tr><tr><td>y</td><td>合成后的输出</td><td>0.25 × 2 + 0.75 × 10 = 8</td></tr></tbody></table></div>
+  <p>这里的权重是我们手动指定的。完整的注意力机制还要根据查询与键计算分数，再用归一化步骤得到权重。先理解这个输出动作，能让后面的公式更容易落地。</p>
+</section>
+<section id="experiment">
+  <h2>03 · 先预测，再拖动</h2>
+  <p data-context>保持输入值 2 和 10 不变，只改变第一项的权重。拖动前先预测：如果第一项的份额增加，输出会朝哪个值移动？然后用下面的演示验证。</p>
+  <div class="demo" data-demo="weighted-sum" data-a="2" data-b="10"><p class="demo-label">小实验 / 两个值，如何组成一个输出</p><div class="weight-stage"><div class="weight-block"><p class="small muted">值 v₁ = 2 · 权重</p><p class="weight-value" data-weight-a>0.25</p><div class="weight-bar" data-bar-a></div></div><div class="weight-block"><p class="small muted">值 v₂ = 10 · 权重</p><p class="weight-value" data-weight-b>0.75</p><div class="weight-bar" data-bar-b></div></div></div><label class="field-label" for="mix-weight">第一项权重 w₁；第二项自动取 1 − w₁</label><div class="slider-line"><span class="small">0</span><input id="mix-weight" type="range" min="0" max="100" value="25" step="1"><span class="small">1</span></div><output aria-live="polite">0.25 × 2 + 0.75 × 10 = 8.00</output><div class="demo-controls"><button type="button" data-action="reset">重置实验</button></div></div>
+  <p>你会看到输出始终落在 2 与 10 之间。第一项权重增大时，输出向 2 靠近；两项权重各半时，回到普通平均数 6。这个范围结论依赖非负、总和为 1，不能直接套到任意线性组合。</p>
+  <details><summary>为什么不会超过两个值的范围？</summary><p>写成 y = 2w₁ + 10(1 − w₁) = 10 − 8w₁。由于 w₁ 在 0 到 1 之间，输出从 10 平滑变化到 2。多维向量也可以逐分量计算，但几何上应理解为两个向量之间的线段。</p></details>
+</section>
+<section id="process">
+  <h2>04 · 把动作拆开看</h2>
+  <p>别急着把加权和记成一个整体。先逐步追踪：确定比例、分别相乘、相加得到输出。下面的演示只展示运算顺序，不代表模型会分三个时间步执行这些操作。</p>
+  <div class="demo" data-demo="steps"><p class="demo-label">过程演示 / 示例权重 0.25 与 0.75</p><ol data-steps><li data-caption="确认权重非负，总和为 1。这里是手动指定比例。"><strong>① 分配比例</strong><br>0.25 与 0.75</li><li data-caption="逐项相乘：0.25 × 2 = 0.5，0.75 × 10 = 7.5。"><strong>② 计算贡献</strong><br>0.5 与 7.5</li><li data-caption="把两项贡献加起来：0.5 + 7.5 = 8。"><strong>③ 合成输出</strong><br>得到 8</li></ol><p data-step-caption aria-live="polite">确认权重后，逐步查看每项贡献。</p><div class="demo-controls"><button type="button" data-action="prev">上一步</button><button type="button" data-action="play" aria-pressed="false">播放演示</button><button type="button" data-action="next">下一步</button><button type="button" data-action="reset">重置</button></div></div>
+  <p>做题时也用这个顺序。先写出每项贡献，再相加，可以区分“把权重配反了”与“算术出错”这两种不同问题。</p>
+</section>
+<section id="transfer">
+  <h2>05 · 迁移到注意力输出</h2>
+  <p data-context>当输入变成向量，加权求和的规则没有变：同一个权重乘到向量的每个分量，再逐分量相加。注意力输出常写成权重矩阵乘值矩阵；其中一行，可以理解为一次这样的信息合成。</p>
+  <div class="formula">v₁ = (2, 0)，v₂ = (0, 4)<br>y = 0.25v₁ + 0.75v₂ = (0.5, 3)</div>
+  <p>每个输出分量分别来自对应输入分量的加权贡献。即使第一项有较小权重，它仍然可能携带第二项没有的信息；仅凭权重较小，不能保证删除这一项不会影响后续结果。</p>
+  <div class="callout"><strong>这个类比的边界</strong><p>本节没有计算查询、键与 softmax，也没有展示多头注意力、残差连接或真实模型性能。它解释的是注意力输出的一个运算部件；不能据此断言注意力权重就是因果重要性，或证明某种压缩方法没有质量损失。</p></div>
+</section>
+<section id="checkpoint">
+  <h2>06 · 带走三个检查点</h2>
+  <p>第一，检查权重是否满足当前模型的约束。第二，写出每项贡献，再核对输出。第三，迁移到新场景时先问：哪些操作没有变，哪些机制还没有解释？</p>
+  <details><summary>常见误解：加权求和就是选最大的一项</summary><p>只要另一项权重不为零，它仍然参与运算。只有一个权重为 1、其余为 0 时，输出才完全等于被选中的值。</p></details>
+  <details><summary>常见误解：会算这道例子就掌握了注意力</summary><p>算例是有用证据，但只覆盖了加权求和。理解完整注意力，还需要解释权重如何产生、矩阵形状为什么匹配，以及输出如何参与后续计算。</p></details>
+  <p>现在进入完整题组：既有基本计算，也有向量迁移与开放解释。答题时可以随时打开独立答疑；不需要先回答一个问题才看得到其余题目。</p>
+</section>

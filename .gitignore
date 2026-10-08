@@ -1,0 +1,20 @@
+# Python and local development
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# Generated course previews and personal learning records
+/knowbridge-preview/
+/knowbridge/
+/preview-output/
+/quality-output/
+
+# Local credentials and editor state
+.env
+.env.*
+.vscode/
+.idea/
